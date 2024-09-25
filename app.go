@@ -3,6 +3,10 @@ package main
 import (
 	"fmt"
 
+	"github.com/adnux/go-basic-projects/bank"
+	"github.com/adnux/go-basic-projects/investments"
+	"github.com/adnux/go-basic-projects/profits"
+
 	"github.com/inancgumus/screen"
 )
 
@@ -18,11 +22,11 @@ func main() {
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
-		startInvestmentCalculator()
+		investments.StartInvestmentCalculator()
 	case 2:
-		startProfitCalculator()
+		profits.StartProfitCalculator()
 	case 3:
-		startBankApp()
+		bank.StartBankApp()
 	}
 
 }

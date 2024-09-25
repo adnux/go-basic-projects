@@ -1,4 +1,4 @@
-package main
+package investments
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func startInvestmentCalculator() {
+func StartInvestmentCalculator() {
 
 	fmt.Print(("Enter the inflation rate: (2.5 default)"))
 	var inflationRate float64 = 2.5

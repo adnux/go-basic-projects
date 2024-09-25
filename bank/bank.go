@@ -1,25 +1,16 @@
-package main
+package bank
 
 import (
 	"fmt"
 
-	"example.com/go-project/fileOps"
+	"github.com/Pallinder/go-randomdata"
+	"github.com/adnux/go-basic-projects/fileOps"
 )
-
-var Reset = "\033[0m"
-var Red = "\033[31m"
-var Green = "\033[32m"
-var Yellow = "\033[33m"
-var Blue = "\033[34m"
-var Magenta = "\033[35m"
-var Cyan = "\033[36m"
-var Gray = "\033[37m"
-var White = "\033[97m"
 
 const accountBalanceFileName = "balance.txt"
 const balanceMessage = "Your balance is %.2f"
 
-func startBankApp() {
+func StartBankApp() {
 	var accountBalance, error = fileOps.ReadFloatFromFile(accountBalanceFileName)
 	if error != nil {
 		fmt.Printf(Red+"ERROR: %v "+Reset+"\n", error)
@@ -27,11 +18,12 @@ func startBankApp() {
 		return
 	}
 
-	fmt.Println("Welcome to the Go Bank App")
+	fmt.Println(Blue + "Welcome to the Go Bank App" + Reset)
+	fmt.Println("Reach us 24/7 on", randomdata.PhoneNumber())
 
 	for choice := 0; choice != 4; choice = 0 {
 
-		PresentOptions()
+		PresentBankOptions()
 
 		fmt.Print(Cyan + "Enter your choice: " + Reset)
 		fmt.Scan(&choice)

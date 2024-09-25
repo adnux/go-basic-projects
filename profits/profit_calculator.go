@@ -1,4 +1,4 @@
-package main
+package profits
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func startProfitCalculator() {
+func StartProfitCalculator() {
 
 	revenue, err := getUserInput("Revenue: ")
 	if err != nil {
