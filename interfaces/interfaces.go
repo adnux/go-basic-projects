@@ -6,11 +6,24 @@ import (
 	"os"
 	"strings"
 
+	"github.com/adnux/go-basic-projects/colors"
 	"github.com/adnux/go-basic-projects/interfaces/note"
 	"github.com/adnux/go-basic-projects/interfaces/todo"
 )
 
+type saver interface {
+	Save() error
+}
+
+type outputtable interface {
+	saver
+	Display()
+}
+
 func StartInterfaces() {
+	printSomething("Hello")
+	printSomething(1.5)
+
 	title, content := getNoteData()
 	todoText := getUserInput("Todo content:")
 
@@ -28,21 +41,41 @@ func StartInterfaces() {
 		return
 	}
 
-	todo.Display()
-	err = todo.Save()
+	err = outputData(todo)
+
 	if err != nil {
-		fmt.Println("Saving the todo failed.")
 		return
 	}
 
-	userNote.Display()
-	err = userNote.Save()
+	outputData(userNote)
+}
+
+func printSomething(value any) {
+	switch value.(type) {
+	case int:
+		fmt.Println(colors.Green, "Integer:", value, colors.Reset)
+	case float64:
+		fmt.Println(colors.Green, "Float:", value, colors.Reset)
+	case string:
+		fmt.Println(colors.Green, "String:", value, colors.Reset)
+	}
+}
+
+func outputData(data outputtable) error {
+	data.Display()
+	return saveData(data)
+}
+
+func saveData(data saver) error {
+	err := data.Save()
+
 	if err != nil {
 		fmt.Println("Saving the note failed.")
-		return
+		return err
 	}
 
 	fmt.Println("Saving the note succeeded!")
+	return nil
 }
 
 func getNoteData() (string, string) {
