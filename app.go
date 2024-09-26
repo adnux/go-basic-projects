@@ -5,6 +5,7 @@ import (
 
 	"github.com/adnux/go-basic-projects/bank"
 	"github.com/adnux/go-basic-projects/investments"
+	"github.com/adnux/go-basic-projects/notes"
 	"github.com/adnux/go-basic-projects/pointers"
 	"github.com/adnux/go-basic-projects/profits"
 	"github.com/adnux/go-basic-projects/structs"
@@ -20,6 +21,7 @@ func main() {
 	fmt.Println("3. Bank App")
 	fmt.Println("4. Pointers")
 	fmt.Println("5. Structs")
+	fmt.Println("6. Notes")
 	fmt.Print("Enter your choice: ")
 
 	var choice int
@@ -35,6 +37,8 @@ func main() {
 		pointers.StartAdulthood()
 	case 5:
 		structs.StartUserStructs()
+	case 6:
+		notes.StartNotes()
 	}
 
 }
