@@ -1,4 +1,4 @@
-package main
+package interfaces
 
 import (
 	"bufio"
@@ -7,10 +7,19 @@ import (
 	"strings"
 
 	"github.com/adnux/go-basic-projects/interfaces/note"
+	"github.com/adnux/go-basic-projects/interfaces/todo"
 )
 
 func StartInterfaces() {
 	title, content := getNoteData()
+	todoText := getUserInput("Todo content:")
+
+	todo, err := todo.New(todoText)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	userNote, err := note.New(title, content)
 
@@ -19,9 +28,15 @@ func StartInterfaces() {
 		return
 	}
 
+	todo.Display()
+	err = todo.Save()
+	if err != nil {
+		fmt.Println("Saving the todo failed.")
+		return
+	}
+
 	userNote.Display()
 	err = userNote.Save()
-
 	if err != nil {
 		fmt.Println("Saving the note failed.")
 		return
