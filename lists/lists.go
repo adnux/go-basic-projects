@@ -7,7 +7,7 @@ func StartLists() {
 	productNames[2] = "A Carpet"
 	fmt.Println("productNames=>", productNames)
 
-	prices := [4]float64{10.99, 9.99, 45.99, 20.0}
+	prices := []float64{10.99, 9.99, 45.99, 20.0}
 	fmt.Println("prices=>", prices)
 	fmt.Println("prices[2]=>", prices[2])
 
@@ -20,6 +20,10 @@ func StartLists() {
 	fmt.Println("len(highlightedPrices)=>", len(highlightedPrices), "cap(highlightedPrices)=>", cap(highlightedPrices))
 
 	highlightedPrices = highlightedPrices[:3]
-	fmt.Println("highlightedPrices=>", highlightedPrices)
+	fmt.Println("highlightedPrices======>", highlightedPrices)
 	fmt.Println("len(highlightedPrices)=>", len(highlightedPrices), "cap(highlightedPrices)=>", cap(highlightedPrices))
+
+	prices = append(prices, 5.99)
+	prices = prices[1:]
+	fmt.Println("prices=================>", prices)
 }
