@@ -7,6 +7,7 @@ import (
 	"github.com/adnux/go-basic-projects/generics"
 	"github.com/adnux/go-basic-projects/interfaces"
 	"github.com/adnux/go-basic-projects/investments"
+	"github.com/adnux/go-basic-projects/lists"
 	"github.com/adnux/go-basic-projects/notes"
 	"github.com/adnux/go-basic-projects/pointers"
 	"github.com/adnux/go-basic-projects/profits"
@@ -26,6 +27,7 @@ func main() {
 	fmt.Println("6. Notes")
 	fmt.Println("7. Interfaces")
 	fmt.Println("8. Generics")
+	fmt.Println("9. Lists")
 	fmt.Println("0. Exit")
 
 	fmt.Print("Enter your choice: ")
@@ -49,6 +51,8 @@ func main() {
 		interfaces.StartInterfaces()
 	case 8:
 		generics.StartGenerics()
+	case 9:
+		lists.StartLists()
 	case 0:
 		fmt.Println("Bye!")
 	}
