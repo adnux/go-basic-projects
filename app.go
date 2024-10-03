@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/adnux/go-basic-projects/bank"
+	"github.com/adnux/go-basic-projects/concurrency"
 	"github.com/adnux/go-basic-projects/functions"
 	"github.com/adnux/go-basic-projects/generics"
 	"github.com/adnux/go-basic-projects/interfaces"
@@ -33,6 +34,7 @@ func main() {
 	fmt.Println("10. Lists Practice")
 	fmt.Println("11. Maps")
 	fmt.Println("12. Functions")
+	fmt.Println("13. Concurrency")
 	fmt.Println("0. Exit")
 
 	fmt.Print("Enter your choice: ")
@@ -64,6 +66,8 @@ func main() {
 		maps.MapsArrays()
 	case 12:
 		functions.StartFunctions()
+	case 13:
+		concurrency.StartGoRoutines()
 	case 0:
 		fmt.Println("Bye!")
 	}
