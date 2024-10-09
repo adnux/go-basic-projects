@@ -61,20 +61,27 @@ func printSomething(value any) {
 	}
 }
 
-func outputData(data outputtable) error {
+func outputData[T outputtable](data T) error {
 	data.Display()
 	return saveData(data)
 }
 
-func saveData(data saver) error {
+func getTypeName[T saver](data T) string {
+	typeName := strings.Split(fmt.Sprintf("%T", data), ".")
+	return typeName[len(typeName)-1]
+}
+
+func saveData[T saver](data T) error {
 	err := data.Save()
 
+	typeName := getTypeName(data)
+
 	if err != nil {
-		fmt.Println("Saving the note failed.")
+		fmt.Printf("Saving the %s failed.\n", typeName)
 		return err
 	}
 
-	fmt.Println("Saving the note succeeded!")
+	fmt.Printf("Saving the %s succeeded!\n", typeName)
 	return nil
 }
 

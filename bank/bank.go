@@ -12,7 +12,7 @@ const accountBalanceFileName = "balance.txt"
 const balanceMessage = "Your balance is %.2f"
 
 func StartBankApp() {
-	var accountBalance, error = fileOps.ReadFloatFromFile(accountBalanceFileName)
+	var accountBalance, error = fileOps.ReadFloatFromFile(accountBalanceFileName, true)
 	if error != nil {
 		fmt.Printf(colors.Red+"ERROR: %v "+colors.Reset+"\n", error)
 		// panic(error)

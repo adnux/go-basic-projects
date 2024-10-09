@@ -7,9 +7,13 @@ import (
 	"strconv"
 )
 
-func ReadFloatFromFile(fileName string) (float64, error) {
+func ReadFloatFromFile(fileName string, create bool) (float64, error) {
 	data, err := os.ReadFile(fileName)
 	if err != nil {
+		if create {
+			WriteFloatToFile(fileName, 0)
+			return 0, nil
+		}
 		return 0, errors.New("error reading balance")
 	}
 	valueText := string(data)
