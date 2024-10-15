@@ -7,17 +7,17 @@ import (
 
 var start time.Time
 
-func getTimeSinceStart() string {
+func GetTimeSinceStart() string {
 	return fmt.Sprintf("- time(%s)", time.Since(start).String())
 }
 
-func greet(phrase string, doneChan chan bool) {
+func Greet(phrase string, doneChan chan bool) {
 	fmt.Println("Hello!", phrase)
 	doneChan <- true
 }
 
-func slowGreet(phrase string, doneChan chan bool) {
-	time.Sleep(3 * time.Second) // simulate a slow, long-taking task
+func SlowGreet(phrase string, doneChan chan bool) {
+	time.Sleep(2 * time.Second) // simulate a slow, long-taking task
 	fmt.Println("Hello!", phrase)
 	doneChan <- true
 	close(doneChan)
@@ -31,13 +31,13 @@ func StartGoRoutines() {
 	// dones[0] = make(chan bool)
 	// go greet("Nice to meet you!", dones[0])
 
-	go greet("Nice to meet you!", done)
-	go greet("How are you?", done)
-	go slowGreet("How ... are ... you ...?", done)
-	go greet("I hope you're liking the course!", done)
+	go Greet("Nice to meet you!", done)
+	go Greet("How are you?", done)
+	go SlowGreet("How ... are ... you ...?", done)
+	go Greet("I hope you're liking the course!", done)
 	// fmt.Println("Waiting for the slow greeting...", <-done)
 
 	for range done {
-		fmt.Println("Done!", getTimeSinceStart())
+		fmt.Println("Done!", GetTimeSinceStart())
 	}
 }

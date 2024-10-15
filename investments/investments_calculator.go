@@ -23,13 +23,13 @@ func investmentCalculator(inflationRate float64, expectedReturnRate float64) {
 	var investmentAmount float64
 	var years float64
 
-	outputText("Expected Investment Amount: ")
+	OutputText("Expected Investment Amount: ")
 	fmt.Scan(&investmentAmount)
 
-	outputText("Expected Years: ")
+	OutputText("Expected Years: ")
 	fmt.Scan(&years)
 
-	futureValue, futureRealValue := calculateValue(investmentAmount, expectedReturnRate, years, inflationRate)
+	futureValue, futureRealValue := CalculateValue(investmentAmount, expectedReturnRate, years, inflationRate)
 	// futureValue := calculateFutureValue(investmentAmount, expectedReturnRate, years)
 	// futureValue := investmentAmount * math.Pow(1 + expectedReturnRate / 100, years)
 	// futureRealValue := calculateFutureAdjustedValue(futureValue, inflationRate, years)
@@ -37,23 +37,36 @@ func investmentCalculator(inflationRate float64, expectedReturnRate float64) {
 
 	formattedFutureValue := fmt.Sprintf("Future Value: %.2f\n", futureValue)
 	formattedFutureAdjustedValue := fmt.Sprintf("Adjusted Future Value: %.2f\n", futureRealValue)
-	outputText(formattedFutureValue, formattedFutureAdjustedValue)
+	OutputText(formattedFutureValue, formattedFutureAdjustedValue)
 }
 
-func calculateValue(investmentAmount float64, expectedReturnRate float64, years float64, inflationRate float64) (futureValue float64, futureRealValue float64) {
+func CalculateValue(
+	investmentAmount float64,
+	expectedReturnRate float64,
+	years float64,
+	inflationRate float64,
+) (futureValue float64, futureRealValue float64) {
 	futureValue = investmentAmount * math.Pow(1+expectedReturnRate/100, years)
 	futureRealValue = futureValue / math.Pow(1+inflationRate/100, years)
 	return futureValue, futureRealValue
 }
 
-func calculateFutureValue(investmentAmount float64, expectedReturnRate float64, years float64) float64 {
+func CalculateFutureValue(
+	investmentAmount float64,
+	expectedReturnRate float64,
+	years float64,
+) float64 {
 	return investmentAmount * math.Pow(1+expectedReturnRate/100, years)
 }
 
-func calculateFutureAdjustedValue(futureValue float64, inflationRate float64, years float64) float64 {
+func CalculateFutureAdjustedValue(
+	futureValue float64,
+	inflationRate float64,
+	years float64,
+) float64 {
 	return futureValue / math.Pow(1+inflationRate/100, years)
 }
 
-func outputText(text ...string) {
+func OutputText(text ...string) {
 	fmt.Print(strings.Join(text, ""))
 }

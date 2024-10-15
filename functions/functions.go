@@ -15,33 +15,33 @@ func StartFunctions() {
 	moreNumbers := []int{6, 7, 8, 9, 10}
 	fmt.Println("moreNumbers =>", moreNumbers)
 
-	doubled := transformNumbers(&numbers, double)
+	doubled := TransformNumbers(&numbers, Double)
 	fmt.Println("doubled =>", doubled)
 
-	tripled := transformNumbers(&numbers, triple)
+	tripled := TransformNumbers(&numbers, Triple)
 	fmt.Println("tripled =>", tripled)
 
-	transformedFnOne := getTransformerFunction(&numbers)
-	transformedNumbersOne := transformNumbers(&numbers, transformedFnOne)
+	transformedFnOne := GetTransformerFunction(&numbers)
+	transformedNumbersOne := TransformNumbers(&numbers, transformedFnOne)
 	fmt.Println("transformedNumbersOne =>", transformedNumbersOne)
 
-	transformedFnTwo := getTransformerFunction(&moreNumbers)
-	transformedTwo := transformNumbers(&moreNumbers, transformedFnTwo)
+	transformedFnTwo := GetTransformerFunction(&moreNumbers)
+	transformedTwo := TransformNumbers(&moreNumbers, transformedFnTwo)
 	fmt.Println("transformedTwo =>", transformedTwo)
 
-	anonymousNumbers := transformNumbers(&numbers, createTransformerFn(10))
+	anonymousNumbers := TransformNumbers(&numbers, CreateTransformerFn(10))
 	fmt.Println("anonymousNumbers =>", numbers, "to", anonymousNumbers)
 
-	factorialNumber := factorial(20)
+	factorialNumber := Factorial(20)
 	p := message.NewPrinter(language.Portuguese)
 	p.Printf("factorialNumber(%d) => %d \n", 20, factorialNumber)
 
 	slice := []int{1, 2, 3, 4, 5}
-	sum := sumUp(slice...)
+	sum := SumUp(slice...)
 	fmt.Println("sum =>", sum)
 }
 
-func sumUp(numbers ...int) int {
+func SumUp(numbers ...int) int {
 	sum := 0
 	for _, number := range numbers {
 		sum += number
@@ -49,7 +49,7 @@ func sumUp(numbers ...int) int {
 	return sum
 }
 
-func transformNumbers(numbers *[]int, transform TransformFn) []int {
+func TransformNumbers(numbers *[]int, transform TransformFn) []int {
 	doubled := []int{}
 	for _, number := range *numbers {
 		doubled = append(doubled, transform(number))
@@ -57,33 +57,33 @@ func transformNumbers(numbers *[]int, transform TransformFn) []int {
 	return doubled
 }
 
-func getTransformerFunction(numbers *[]int) TransformFn {
+func GetTransformerFunction(numbers *[]int) TransformFn {
 	if len(*numbers) == 0 {
 		return nil
 	}
 	if (*numbers)[0] == 1 {
-		return double
+		return Double
 	}
-	return triple
+	return Triple
 }
 
-func createTransformerFn(factor int) func(int) int {
+func CreateTransformerFn(factor int) func(int) int {
 	return func(number int) int {
 		return number * factor
 	}
 }
 
-func factorial(number int) int {
+func Factorial(number int) int {
 	if number == 0 {
 		return 1
 	}
-	return number * factorial(number-1)
+	return number * Factorial(number-1)
 }
 
-func double(number int) int {
+func Double(number int) int {
 	return number * 2
 }
 
-func triple(number int) int {
+func Triple(number int) int {
 	return number * 3
 }

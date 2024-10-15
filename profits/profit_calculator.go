@@ -24,7 +24,7 @@ func StartProfitCalculator() {
 		return
 	}
 
-	ebt, profit, ratio := calculateFinancialValues(revenue, expenses, taxRate)
+	ebt, profit, ratio := CalculateFinancialValues(revenue, expenses, taxRate)
 
 	fmt.Printf("EBT: %.1f\n", ebt)
 	fmt.Printf("Profit: %.2f\n", profit)
@@ -39,7 +39,7 @@ func getUserInput(infoText string) (float64, error) {
 	fmt.Print(infoText)
 	fmt.Scan(&userInput)
 	if userInput < 0 {
-		return 0, errors.New("Value must be a positive number")
+		return 0, errors.New("value must be a positive number")
 	}
 	return userInput, nil
 
@@ -50,24 +50,31 @@ func storeResultsInFile(ebt float64, profit float64, ratio float64) {
 	os.WriteFile("profits.txt", []byte(results), 0644)
 }
 
-func calculateFinancialValues(revenue float64, expenses float64, taxRate float64) (ebt float64, profit float64, ratio float64) {
+func CalculateFinancialValues(revenue float64, expenses float64, taxRate float64) (ebt float64, profit float64, ratio float64) {
 	ebt = revenue - expenses
 	profit = ebt * (1 - taxRate/100)
 	ratio = ebt / profit
 	return ebt, profit, ratio
 }
 
-func calculateEbt(revenue float64, expenses float64) float64 {
+func CalculateFinancialValuesComposed(revenue float64, expenses float64, taxRate float64) (ebt float64, profit float64, ratio float64) {
+	ebt = CalculateEbt(revenue, expenses)
+	profit = CalculateProfit(ebt, taxRate)
+	ratio = CalculateRatio(ebt, profit)
+	return ebt, profit, ratio
+}
+
+func CalculateEbt(revenue float64, expenses float64) float64 {
 	ebt := revenue - expenses
 	return ebt
 }
 
-func calculateProfit(ebt float64, taxRate float64) float64 {
+func CalculateProfit(ebt float64, taxRate float64) float64 {
 	profit := ebt * (1 - taxRate/100)
 	return profit
 }
 
-func calculateRatio(ebt float64, profit float64) float64 {
-	ratio := profit / ebt
+func CalculateRatio(ebt float64, profit float64) float64 {
+	ratio := ebt / profit
 	return ratio
 }

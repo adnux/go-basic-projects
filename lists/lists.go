@@ -12,7 +12,8 @@ func StartLists() {
 	fmt.Println("prices[2]=>", prices[2])
 
 	featuredPrices := prices[1:]
-	featuredPrices[0] = 199.99
+	// featuredPrices[0] = 199.99
+	featuredPrices = ReplaceSliceElement(featuredPrices, 0, 199.99)
 	highlightedPrices := featuredPrices[:1]
 	fmt.Println("prices=================>", prices)
 	fmt.Println("featuredPrices=========>", featuredPrices)
@@ -20,6 +21,7 @@ func StartLists() {
 	fmt.Println("len(highlightedPrices)=>", len(highlightedPrices), "cap(highlightedPrices)=>", cap(highlightedPrices))
 
 	highlightedPrices = highlightedPrices[:3]
+	// highlightedPrices = CutSlice(highlightedPrices, 0, 3)
 	fmt.Println("highlightedPrices======>", highlightedPrices)
 	fmt.Println("len(highlightedPrices)=>", len(highlightedPrices), "cap(highlightedPrices)=>", cap(highlightedPrices))
 
@@ -30,4 +32,13 @@ func StartLists() {
 	discountPrices := []float64{101.99, 80.99, 20.59}
 	prices = append(prices, discountPrices...)
 	fmt.Println("prices=================>", prices)
+}
+
+func ReplaceSliceElement(list []float64, index int, value float64) []float64 {
+	list[index] = value
+	return list
+}
+
+func CutSlice(list []float64, start, end int) []float64 {
+	return list[start:end]
 }

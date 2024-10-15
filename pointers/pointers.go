@@ -12,11 +12,11 @@ func StartAdulthood() {
 
 	fmt.Println("Age:", *agePointer)
 
-	adultYears := getAdulthoodYears(*agePointer)
+	adultYears := GetAdulthoodYears(*agePointer)
 	fmt.Println("Years as an adult:", adultYears)
 }
 
-func getAdulthoodYears(age int) int {
+func GetAdulthoodYears(age int) int {
 	// *age = *age - 18
 	return age - 18
 }
