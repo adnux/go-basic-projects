@@ -31,6 +31,6 @@ func GreetTest(t *testing.T) {
 
 func SlowGreetTest(t *testing.T) {
 	done := make(chan bool)
-	go SlowGreet("Nice to meet you!", done)
+	go SlowGreet("Nice to meet you!", 1, done)
 	<-done
 }

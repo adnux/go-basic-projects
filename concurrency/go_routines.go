@@ -16,8 +16,8 @@ func Greet(phrase string, doneChan chan bool) {
 	doneChan <- true
 }
 
-func SlowGreet(phrase string, doneChan chan bool) {
-	time.Sleep(2 * time.Second) // simulate a slow, long-taking task
+func SlowGreet(phrase string, seconds int, doneChan chan bool) {
+	time.Sleep(time.Duration(seconds) * time.Second) // simulate a slow, long-taking task
 	fmt.Println("Hello!", phrase)
 	doneChan <- true
 	close(doneChan)
@@ -33,7 +33,7 @@ func StartGoRoutines() {
 
 	go Greet("Nice to meet you!", done)
 	go Greet("How are you?", done)
-	go SlowGreet("How ... are ... you ...?", done)
+	go SlowGreet("How ... are ... you ...?", 3, done)
 	go Greet("I hope you're liking the course!", done)
 	// fmt.Println("Waiting for the slow greeting...", <-done)
 
